@@ -36,7 +36,9 @@ public class DuenoController {
         Rol rol = rolService.findById( 1 );
         duenoPOJO.setPassword(passwordEncoder.encode(duenoPOJO.getPassword()));
         Dueno existingDueno = duenoService.findByCedulaDueno( duenoPOJO.getCedulaDueno() );
-        if( rol == null || existingDueno != null || !duenoService.isRightDueno( duenoPOJO ) ){
+        String email = duenoPOJO.getCorreoElectronico();
+        Usuario usuarioExistente = usuarioService.findByCorreoElectronico(email);
+        if( rol == null || existingDueno != null || !duenoService.isRightDueno( duenoPOJO ) || usuarioExistente != null ){
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
         }
 
@@ -64,4 +66,5 @@ public class DuenoController {
         List<Mascota> mascotasDueno = dueno.getMascotas();
         return ResponseEntity.ok(mascotasDueno);
     }
+    
 }

@@ -4,15 +4,12 @@ import com.vetun.apirest.model.Usuario;
 import com.vetun.apirest.pojo.RegistrarDuenoPOJO;
 import com.vetun.apirest.pojo.RegistrarMedicoPOJO;
 import com.vetun.apirest.repository.UsuarioRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
-
-
 
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -21,6 +18,8 @@ public class UsuarioService {
     public Usuario findByUsername(String username ){
         return usuarioRepository.findByUsername( username );
     }
+
+    public Usuario findByCorreoElectronico( String correo ){ return usuarioRepository.findByCorreoElectronico( correo );}
 
     public void save( Usuario usuario ){
         usuarioRepository.save( usuario );
