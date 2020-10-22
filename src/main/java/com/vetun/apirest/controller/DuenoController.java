@@ -5,7 +5,6 @@ import com.vetun.apirest.model.Mascota;
 import com.vetun.apirest.model.Rol;
 import com.vetun.apirest.model.Usuario;
 import com.vetun.apirest.pojo.RegistrarDuenoPOJO;
-import com.vetun.apirest.pojo.RegistrarUsuarioPOJO;
 import com.vetun.apirest.service.DuenoService;
 import com.vetun.apirest.service.RolService;
 import com.vetun.apirest.service.UsuarioService;
