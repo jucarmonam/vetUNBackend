@@ -21,10 +21,7 @@ public class Veterinaria {
     private String direccionVeterinaria;
 
     @Column(name="telefono_veterinaria")
-    private int telefonoVeterinaria;
-
-    @Column(name="localizacion")
-    private String localizacion;
+    private long telefonoVeterinaria;
 
     @Column(name="tipo_veterinaria")
     private String tipoVeterinaria;
@@ -65,21 +62,14 @@ public class Veterinaria {
         this.direccionVeterinaria = direccionVeterinaria;
     }
 
-    public int getTelefonoVeterinaria() {
+    public long getTelefonoVeterinaria() {
         return telefonoVeterinaria;
     }
 
-    public void setTelefonoVeterinaria(int telefonoVeterinaria) {
+    public void setTelefonoVeterinaria(long telefonoVeterinaria) {
         this.telefonoVeterinaria = telefonoVeterinaria;
     }
 
-    public String getLocalizacion() {
-        return localizacion;
-    }
-
-    public void setLocalizacion(String localizacion) {
-        this.localizacion = localizacion;
-    }
 
     public String getTipoVeterinaria() {
         return tipoVeterinaria;
@@ -112,7 +102,6 @@ public class Veterinaria {
                 ", nombreVeterinaria=" + nombreVeterinaria +
                 ", direccionVeterinaria=" + direccionVeterinaria +
                 ", telefonoVeterinaria=" + telefonoVeterinaria +
-                ", localizacion=" + localizacion +
                 ", tipoVeterinaria=" + tipoVeterinaria +
                 ", medicos=" + medicos +
                 '}';
