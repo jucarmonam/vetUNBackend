@@ -13,16 +13,18 @@ public class Medico {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int idMedico;
 
-    @Column(name="cedula_medico")
-    private String cedulaMedico;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="id_veterinaria")
+    private Veterinaria idVeterinaria;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name="id_veterinaria")
-    private Veterinaria idVeterinaria;
+    @Column(name="cedula_medico")
+    private String cedulaMedico;
 
     @Column(name="nombre_medico")
     private String nombreMedico;
@@ -30,8 +32,8 @@ public class Medico {
     @Column(name="apellido_medico")
     private String apellidoMedico;
 
-    @Column(name="direccion_residencia")
-    private String direccionResidencia;
+    @Column(name="direccion_medico")
+    private String direccionMedico;
 
     @Column(name="telefono_medico")
     private int telefonoMedico;
@@ -39,17 +41,22 @@ public class Medico {
     @Column(name="matricula_profesional")
     private String matriculaProfesional;
 
-    @Column(name="correo_medico")
-    private String correoMedico;
-
-    @Column(name="contrasenia_medico")
-    private String contraseniaMedico;
+    @Column(name="link_medico")
+    private String linkMedico;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "idMedico")
     private List<Vacunacion> vacunados;
 
     public Medico() {
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public int getIdMedico() {
@@ -100,12 +107,12 @@ public class Medico {
         this.apellidoMedico = apellidoMedico;
     }
 
-    public String getDireccionResidencia() {
-        return direccionResidencia;
+    public String getDireccionMedico() {
+        return direccionMedico;
     }
 
-    public void setDireccionResidencia(String direccionResidencia) {
-        this.direccionResidencia = direccionResidencia;
+    public void setDireccionMedico(String direccionMedico) {
+        this.direccionMedico = direccionMedico;
     }
 
     public int getTelefonoMedico() {
@@ -124,35 +131,27 @@ public class Medico {
         this.matriculaProfesional = matriculaProfesional;
     }
 
-    public String getCorreoMedico() {
-        return correoMedico;
+    public String getLinkMedico() {
+        return linkMedico;
     }
 
-    public void setCorreoMedico(String correoMedico) {
-        this.correoMedico = correoMedico;
-    }
-
-    public String getContraseniaMedico() {
-        return contraseniaMedico;
-    }
-
-    public void setContraseniaMedico(String contraseniaMedico) {
-        this.contraseniaMedico = contraseniaMedico;
+    public void setLinkMedico(String linkMedico) {
+        this.linkMedico = linkMedico;
     }
 
     @Override
     public String toString() {
-        return "Medicos{" +
+        return "Medico{" +
                 "idMedico=" + idMedico +
-                ", cedulaMedico='" + cedulaMedico + '\'' +
                 ", idVeterinaria=" + idVeterinaria +
+                ", usuario=" + usuario +
+                ", cedulaMedico='" + cedulaMedico + '\'' +
                 ", nombreMedico='" + nombreMedico + '\'' +
                 ", apellidoMedico='" + apellidoMedico + '\'' +
-                ", direccionResidencia='" + direccionResidencia + '\'' +
+                ", direccionMedico='" + direccionMedico + '\'' +
                 ", telefonoMedico=" + telefonoMedico +
                 ", matriculaProfesional='" + matriculaProfesional + '\'' +
-                ", correoMedico='" + correoMedico + '\'' +
-                ", contraseniaMedico='" + contraseniaMedico + '\'' +
+                ", linkMedico='" + linkMedico + '\'' +
                 ", vacunados=" + vacunados +
                 '}';
     }

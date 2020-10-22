@@ -5,7 +5,6 @@ import com.vetun.apirest.model.Mascota;
 import com.vetun.apirest.model.Rol;
 import com.vetun.apirest.model.Usuario;
 import com.vetun.apirest.pojo.RegistrarDuenoPOJO;
-import com.vetun.apirest.pojo.RegistrarUsuarioPOJO;
 import com.vetun.apirest.service.DuenoService;
 import com.vetun.apirest.service.RolService;
 import com.vetun.apirest.service.UsuarioService;
@@ -21,9 +20,7 @@ import java.util.List;
 public class DuenoController {
 
     private DuenoService duenoService;
-
     private UsuarioService usuarioService;
-
     private RolService rolService;
     private PasswordEncoder passwordEncoder;
 
@@ -44,7 +41,7 @@ public class DuenoController {
         }
 
         Dueno newDueno = duenoService.mapperDuenoEntity(duenoPOJO);
-        Usuario newUsuario = usuarioService.mapperUsuarioEntity(duenoPOJO);
+        Usuario newUsuario = usuarioService.mapperUsuarioEntityDueno(duenoPOJO);
         newUsuario.setRol(rol);
 
         newUsuario.setDueno(newDueno);
