@@ -41,7 +41,9 @@ public class MedicoController {
         Rol rol = rolService.findById( 2 );
         medicoPOJO.setPassword(passwordEncoder.encode(medicoPOJO.getPassword()));
         Medico medicoExistente = medicoService.findByCedulaMedico( medicoPOJO.getCedulaMedico() );
-        if( rol == null || medicoExistente != null || !medicoService.isRightMedico( medicoPOJO ) ){
+        String email = medicoPOJO.getCorreoElectronico();
+        Usuario usuarioExistente = usuarioService.findByCorreoElectronico(email);
+        if( rol == null || medicoExistente != null || !medicoService.isRightMedico( medicoPOJO ) || usuarioExistente != null ){
             return new ResponseEntity<>( HttpStatus.BAD_REQUEST );
         }
 
