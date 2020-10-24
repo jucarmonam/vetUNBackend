@@ -1,6 +1,7 @@
 package com.vetun.apirest.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,7 +15,8 @@ public class Dueno {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int idDueno;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 

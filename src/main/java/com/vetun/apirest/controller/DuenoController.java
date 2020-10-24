@@ -4,6 +4,7 @@ import com.vetun.apirest.model.Dueno;
 import com.vetun.apirest.model.Mascota;
 import com.vetun.apirest.model.Rol;
 import com.vetun.apirest.model.Usuario;
+import com.vetun.apirest.pojo.PerfilDuenoPOJO;
 import com.vetun.apirest.pojo.RegistrarDuenoPOJO;
 import com.vetun.apirest.service.DuenoService;
 import com.vetun.apirest.service.RolService;
@@ -66,5 +67,29 @@ public class DuenoController {
         List<Mascota> mascotasDueno = dueno.getMascotas();
         return ResponseEntity.ok(mascotasDueno);
     }
-    
+
+    @GetMapping(value = {"pruebas/{duenoId}"} )
+    public ResponseEntity<?> getDuenoById(@PathVariable int duenoId){
+        Dueno dueno = duenoService.findById(duenoId);
+        return ResponseEntity.ok(dueno);
+    }
+
+    @GetMapping(value = {"/dueno/perfil"})
+    public ResponseEntity<?> getDuenoPerfil(){
+        String username = SecurityContextHolder.getContext( ).getAuthentication( ).getName( );
+        Usuario user = usuarioService.findByUsername(username);
+        Dueno dueno = duenoService.findByUsuarioIdUsuario(user.getIdUsuario());
+
+        PerfilDuenoPOJO perfil = new PerfilDuenoPOJO();
+
+        perfil.setCedulaDueno(dueno.getCedulaDueno());
+        perfil.setNombreDueno(dueno.getNombreDueno());
+        perfil.setApellidoDueno(dueno.getApellidoDueno());
+        perfil.setDireccionDueno(dueno.getDireccionDueno());
+        perfil.setTelefonoDueno(dueno.getTelefonoDueno());
+        perfil.setCorreoDueno(user.getCorreoElectronico());
+        perfil.setUsuarioDueno(user.getUsername());
+
+        return ResponseEntity.ok(perfil);
+    }
 }

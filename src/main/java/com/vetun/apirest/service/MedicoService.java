@@ -48,4 +48,8 @@ public class MedicoService {
         nuevoMedico.setMatriculaProfesional(medicoPOJO.getMatriculaProfesional());
         return nuevoMedico;
     }
+
+    public Medico findByUsuarioIdUsuario(int id){
+        return medicoRepository.findByUsuarioIdUsuario(id);
+    }
 }
