@@ -1,14 +1,18 @@
 package com.vetun.apirest.controller;
 
+import com.vetun.apirest.model.Dueno;
 import com.vetun.apirest.model.Medico;
 import com.vetun.apirest.model.Rol;
 import com.vetun.apirest.model.Usuario;
+import com.vetun.apirest.pojo.PerfilDuenoPOJO;
+import com.vetun.apirest.pojo.PerfilMedicoPOJO;
 import com.vetun.apirest.pojo.RegistrarMedicoPOJO;
 import com.vetun.apirest.service.MedicoService;
 import com.vetun.apirest.service.RolService;
 import com.vetun.apirest.service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,4 +61,24 @@ public class MedicoController {
 
         return new ResponseEntity<>( HttpStatus.CREATED );
     }
+    @GetMapping(value = {"/medico/perfil"})
+    public ResponseEntity<?> getMedicoPerfil(){
+        String username = SecurityContextHolder.getContext( ).getAuthentication( ).getName( );
+        Usuario user = usuarioService.findByUsername(username);
+        Medico medico = medicoService.findByUsuarioIdUsuario(user.getIdUsuario());
+
+        PerfilMedicoPOJO perfil = new PerfilMedicoPOJO();
+
+        perfil.setCedulaMedico(medico.getCedulaMedico());
+        perfil.setNombreMedico(medico.getNombreMedico());
+        perfil.setApellidoMedico(medico.getApellidoMedico());
+        perfil.setDireccionMedico(medico.getDireccionMedico());
+        perfil.setTelefonoMedico(medico.getTelefonoMedico());
+        perfil.setCorreoMedico(user.getCorreoElectronico());
+        perfil.setUsuarioMedico(user.getUsername());
+        perfil.setMatriculaProfesional(medico.getMatriculaProfesional());
+
+        return ResponseEntity.ok(perfil);
+    }
+
 }

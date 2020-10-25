@@ -1,6 +1,7 @@
 package com.vetun.apirest.pojo;
 
 public class PerfilDuenoPOJO {
+
     private String nombreDueno;
     private String apellidoDueno;
     private String cedulaDueno;
