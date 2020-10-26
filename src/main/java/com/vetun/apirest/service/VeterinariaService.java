@@ -22,6 +22,8 @@ public class VeterinariaService {
         return veterinariaRepository.findById( id ).orElse(null);
     }
 
+    public Veterinaria findByNombreVeterinaria( String nombre ){ return  veterinariaRepository.findByNombreVeterinaria( nombre );}
+
     public void save(Veterinaria veterinaria){
         veterinariaRepository.save(veterinaria);
     }
