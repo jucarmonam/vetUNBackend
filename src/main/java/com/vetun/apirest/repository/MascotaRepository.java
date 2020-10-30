@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface MascotaRepository extends JpaRepository<Mascota, Integer> {
     List<Mascota> findAll();
+
+    List<Mascota> findByIdDuenoIdDueno(int idDueno);
 }

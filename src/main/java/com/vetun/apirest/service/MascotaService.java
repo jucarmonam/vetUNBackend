@@ -28,6 +28,10 @@ public class MascotaService {
 
     public List<Mascota> findAll(){ return mascotaRepository.findAll();}
 
+    public List<Mascota> findByDueno(int id){
+        return mascotaRepository.findByIdDuenoIdDueno(id);
+    }
+
     public Mascota mapperMascotaEntity(RegistrarMascotaPOJO mascotaPOJO ){
         Mascota nuevaMascota = new Mascota();
         nuevaMascota.setEspecie(mascotaPOJO.getEspecie());

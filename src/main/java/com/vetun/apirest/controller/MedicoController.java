@@ -1,12 +1,11 @@
 package com.vetun.apirest.controller;
 
-import com.vetun.apirest.model.Dueno;
-import com.vetun.apirest.model.Medico;
-import com.vetun.apirest.model.Rol;
-import com.vetun.apirest.model.Usuario;
+import com.vetun.apirest.model.*;
 import com.vetun.apirest.pojo.PerfilDuenoPOJO;
 import com.vetun.apirest.pojo.PerfilMedicoPOJO;
 import com.vetun.apirest.pojo.RegistrarMedicoPOJO;
+import com.vetun.apirest.repository.HoraAtencionRepository;
+import com.vetun.apirest.service.HoraAtencionService;
 import com.vetun.apirest.service.MedicoService;
 import com.vetun.apirest.service.RolService;
 import com.vetun.apirest.service.UsuarioService;
@@ -16,19 +15,24 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class MedicoController {
 
     private MedicoService medicoService;
     private UsuarioService usuarioService;
     private RolService rolService;
+    private HoraAtencionService horaAtencionService;
     private PasswordEncoder passwordEncoder;
 
-    public MedicoController(MedicoService medicoService, UsuarioService usuarioService, RolService rolService, PasswordEncoder passwordEncoder) {
+
+    public MedicoController(MedicoService medicoService, UsuarioService usuarioService, RolService rolService, PasswordEncoder passwordEncoder, HoraAtencionService horaAtencionService) {
         this.medicoService = medicoService;
         this.usuarioService = usuarioService;
         this.rolService = rolService;
         this.passwordEncoder = passwordEncoder;
+        this.horaAtencionService = horaAtencionService;
     }
 
     @GetMapping("/medicos/{medicoId}")
@@ -80,5 +84,19 @@ public class MedicoController {
 
         return ResponseEntity.ok(perfil);
     }
+
+    @PutMapping(value = {"/medico/agregarHora"})
+    public ResponseEntity<?> agregarHorasDisponibles(@RequestBody List<HoraAtencion> horaAtencions){
+        String username = SecurityContextHolder.getContext( ).getAuthentication( ).getName( );
+        Usuario user = usuarioService.findByUsername(username);
+        Medico medico = medicoService.findByUsuarioIdUsuario(user.getIdUsuario());
+
+        for(HoraAtencion hora : horaAtencions){
+            hora.setIdMedico(medico);
+            horaAtencionService.save(hora);
+        }
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
 
 }

@@ -1,6 +1,5 @@
 package com.vetun.apirest.pojo;
 
-import javax.persistence.Column;
 
 public class PerfilVeterinariaPOJO {
 
@@ -8,6 +7,9 @@ public class PerfilVeterinariaPOJO {
     private String direccionVeterinaria;
     private long telefonoVeterinaria;
     private String tipoVeterinaria;
+
+    public PerfilVeterinariaPOJO() {
+    }
 
     public String getNombreVeterinaria() {
         return nombreVeterinaria;
@@ -39,5 +41,15 @@ public class PerfilVeterinariaPOJO {
 
     public void setTipoVeterinaria(String tipoVeterinaria) {
         this.tipoVeterinaria = tipoVeterinaria;
+    }
+
+    @Override
+    public String toString() {
+        return "PerfilVeterinariaPOJO{" +
+                "nombreVeterinaria='" + nombreVeterinaria + '\'' +
+                ", direccionVeterinaria='" + direccionVeterinaria + '\'' +
+                ", telefonoVeterinaria=" + telefonoVeterinaria +
+                ", tipoVeterinaria='" + tipoVeterinaria + '\'' +
+                '}';
     }
 }

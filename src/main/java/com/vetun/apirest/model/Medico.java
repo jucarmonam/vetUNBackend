@@ -46,6 +46,10 @@ public class Medico {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "idMedico")
+    private List<HoraAtencion> horarioMedico;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idMedico")
     private List<Vacunacion> vacunados;
 
     @JsonIgnore
@@ -54,7 +58,7 @@ public class Medico {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "idMedico")
-    private List<CostoAtencion> costoAtencion;
+    private List<Costo> costos;
 
     public Medico() {
     }
@@ -139,6 +143,22 @@ public class Medico {
         this.matriculaProfesional = matriculaProfesional;
     }
 
+    public List<HoraAtencion> getHorarioMedico() {
+        return horarioMedico;
+    }
+
+    public void setHorarioMedico(List<HoraAtencion> horarioMedico) {
+        this.horarioMedico = horarioMedico;
+    }
+
+    public List<Costo> getCostos() {
+        return costos;
+    }
+
+    public void setCostos(List<Costo> costos) {
+        this.costos = costos;
+    }
+
     public String getLinkMedico() {
         return linkMedico;
     }
@@ -155,12 +175,12 @@ public class Medico {
         this.citas = citas;
     }
 
-    public List<CostoAtencion> getCostoAtencion() {
-        return costoAtencion;
+    public List<Costo> getCostoAtencion() {
+        return costos;
     }
 
-    public void setCostoAtencion(List<CostoAtencion> costoAtencion) {
-        this.costoAtencion = costoAtencion;
+    public void setCostoAtencion(List<Costo> costos) {
+        this.costos = costos;
     }
 
     @Override

@@ -37,4 +37,14 @@ public class RegistrarVeterinariaPOJO {
     public void setTipoVeterinaria(String tipoVeterinaria) {
         this.tipoVeterinaria = tipoVeterinaria;
     }
+
+    @Override
+    public String toString() {
+        return "RegistrarVeterinariaPOJO{" +
+                "nombreVeterinaria='" + nombreVeterinaria + '\'' +
+                ", direccionVeterinaria='" + direccionVeterinaria + '\'' +
+                ", telefonoVeterinaria=" + telefonoVeterinaria +
+                ", tipoVeterinaria='" + tipoVeterinaria + '\'' +
+                '}';
+    }
 }

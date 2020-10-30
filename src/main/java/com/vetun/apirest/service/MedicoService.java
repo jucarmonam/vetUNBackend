@@ -1,6 +1,7 @@
 package com.vetun.apirest.service;
 
 import com.vetun.apirest.model.Dueno;
+import com.vetun.apirest.model.HoraAtencion;
 import com.vetun.apirest.model.Medico;
 import com.vetun.apirest.pojo.RegistrarDuenoPOJO;
 import com.vetun.apirest.pojo.RegistrarMedicoPOJO;
@@ -52,4 +53,6 @@ public class MedicoService {
     public Medico findByUsuarioIdUsuario(int id){
         return medicoRepository.findByUsuarioIdUsuario(id);
     }
+
+
 }

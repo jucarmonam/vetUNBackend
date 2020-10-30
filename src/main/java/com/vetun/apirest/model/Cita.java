@@ -1,6 +1,11 @@
 package com.vetun.apirest.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.springframework.data.annotation.CreatedBy;
+
 import javax.persistence.*;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -13,6 +18,7 @@ public class Cita {
     private int idCita;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="id_medico")
     private Medico idMedico;
 
@@ -20,11 +26,12 @@ public class Cita {
     @JoinColumn(name="id_mascota")
     private Mascota idMascota;
 
-    @Column(name="fecha_cita")
-    private Date fechaCita;
+    @ManyToOne
+    @JoinColumn(name="id_atencion")
+    private TipoAtencion idAtencion;
 
-    @Column(name="tipo_cita")
-    private String tipoCita;
+    @Column(name="fecha_cita")
+    private Time fechaCita;
 
     @Column(name="modalidad_cita")
     private String modalidadCita;
@@ -33,10 +40,12 @@ public class Cita {
 
     }
 
-    public Cita(int idCita, Date fechaCita, String tipoCita, String modalidadCita) {
+    public Cita(int idCita, Medico idMedico, Mascota idMascota, TipoAtencion idAtencion, Time fechaCita, String modalidadCita) {
         this.idCita = idCita;
+        this.idMedico = idMedico;
+        this.idMascota = idMascota;
+        this.idAtencion = idAtencion;
         this.fechaCita = fechaCita;
-        this.tipoCita = tipoCita;
         this.modalidadCita = modalidadCita;
     }
 
@@ -64,20 +73,20 @@ public class Cita {
         this.idMascota = idMascota;
     }
 
-    public Date getFechaCita() {
+    public TipoAtencion getIdAtencion() {
+        return idAtencion;
+    }
+
+    public void setIdAtencion(TipoAtencion idAtencion) {
+        this.idAtencion = idAtencion;
+    }
+
+    public Time getFechaCita() {
         return fechaCita;
     }
 
-    public void setFechaCita(Date fechaCita) {
+    public void setFechaCita(Time fechaCita) {
         this.fechaCita = fechaCita;
-    }
-
-    public String getTipoCita() {
-        return tipoCita;
-    }
-
-    public void setTipoCita(String tipoCita) {
-        this.tipoCita = tipoCita;
     }
 
     public String getModalidadCita() {

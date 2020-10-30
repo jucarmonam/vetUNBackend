@@ -1,11 +1,8 @@
 package com.vetun.apirest.controller;
 
-import com.vetun.apirest.model.Dueno;
 import com.vetun.apirest.model.Medico;
 import com.vetun.apirest.model.Usuario;
 import com.vetun.apirest.model.Veterinaria;
-import com.vetun.apirest.pojo.PerfilDuenoPOJO;
-import com.vetun.apirest.pojo.PerfilMedicoPOJO;
 import com.vetun.apirest.pojo.PerfilVeterinariaPOJO;
 import com.vetun.apirest.pojo.RegistrarVeterinariaPOJO;
 import com.vetun.apirest.repository.MedicoRepository;
@@ -56,9 +53,12 @@ public class VeterinariaController {
         Usuario user = usuarioRepository.findByUsername(username);
         Medico medico = medicoRepository.findByUsuarioIdUsuario(user.getIdUsuario());
 
+        System.out.println(registrarVeterinaria);
+
         String nombreVeterinaria = registrarVeterinaria.getNombreVeterinaria();
         Veterinaria veterinaria = veterinariaService.findByNombreVeterinaria(nombreVeterinaria);
         medico.setIdVeterinaria(veterinaria);
+
         final Medico medicoActualizado = medicoRepository.save(medico);
         return ResponseEntity.ok(medicoActualizado);
     }
@@ -79,13 +79,15 @@ public class VeterinariaController {
         String username = SecurityContextHolder.getContext( ).getAuthentication( ).getName( );
         Usuario user = usuarioService.findByUsername(username);
         Medico medico = medicoService.findByUsuarioIdUsuario(user.getIdUsuario());
+        Veterinaria veterinaria = medico.getIdVeterinaria();
 
         PerfilVeterinariaPOJO perfilVeterinaria = new PerfilVeterinariaPOJO();
 
-        perfilVeterinaria.setNombreVeterinaria(medico.getIdVeterinaria().getNombreVeterinaria());
-        perfilVeterinaria.setDireccionVeterinaria(medico.getIdVeterinaria().getDireccionVeterinaria());
-        perfilVeterinaria.setTelefonoVeterinaria(medico.getIdVeterinaria().getTelefonoVeterinaria());
-        perfilVeterinaria.setTipoVeterinaria(medico.getIdVeterinaria().getTipoVeterinaria());
+        perfilVeterinaria.setNombreVeterinaria(veterinaria.getNombreVeterinaria());
+        perfilVeterinaria.setDireccionVeterinaria(veterinaria.getDireccionVeterinaria());
+        perfilVeterinaria.setTelefonoVeterinaria(veterinaria.getTelefonoVeterinaria());
+        perfilVeterinaria.setTipoVeterinaria(veterinaria.getTipoVeterinaria());
+
 
         return ResponseEntity.ok(perfilVeterinaria);
     }

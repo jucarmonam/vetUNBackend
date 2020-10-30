@@ -4,6 +4,9 @@ import com.vetun.apirest.model.Cita;
 import com.vetun.apirest.repository.CitaRepository;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.List;
+
 @Service
 public class CitaService {
 
@@ -20,4 +23,8 @@ public class CitaService {
     public void save( Cita cita ){
         citaRepository.save( cita );
     }
+
+    /*public List<Cita> findCitas(Timestamp a, Timestamp b){
+        return  citaRepository.findByFechaCitaBetween(a, b);
+    }*/
 }
